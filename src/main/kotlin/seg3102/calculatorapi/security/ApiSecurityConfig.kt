@@ -31,10 +31,12 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
   @Throws(java.lang.Exception::class)
   override fun configure(http: HttpSecurity) {
     http.csrf().disable().authorizeRequests().
-      antMatchers("/calculator/**").hasRole("ADMIN").
-      antMatchers("/calculator/**").hasAnyRole("ADMIN","USER").
+      antMatchers("/calculator/add/**").hasAnyRole("USER").
+      antMatchers("/calculator/subtract/**").hasAnyRole("USER").
+      antMatchers("/calculator/multiply/**").hasAnyRole("ADMIN").
+      antMatchers("/calculator/divide/**").hasAnyRole("ADMIN").
     and().httpBasic().
-    and().requiresChannel().anyRequest().requiresSecure()
+    and().requiresChannel().anyRequest()
   }
 
   @Bean
